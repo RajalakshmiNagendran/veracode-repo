@@ -42,9 +42,18 @@ jobs:
         distribution: 'temurin'
     - run: java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_KEY_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY_SECRET}}" --fail_on_severity="Very High, High" --file veracode-scan-target.zip
       continue-on-error: true
+      
     - name: Convert pipeline scan output to SARIF format
-      uses: veracode/veracode-pipeline-scan-results-to-sarif@v1.0
+      id: convert
+      uses: Veracode/veracode-pipeline-scan-results-to-sarif@v1.0.5
       with:
-        pipeline-results-json: results.json
-        output-results-sarif: veracode-results.sarif
-        finding-rule-level: 4:3:0
+            pipeline-results-json: results.json
+            output-results-sarif: veracode-results.sarif
+            source-base-path-1: "^com/veracode:src/main/java/com/veracode"
+            source-base-path-2: "^WEB-INF:src/main/webapp/WEB-INF"
+            finding-rule-level: "3:1:0"
+  
+    - name: upload sarif file to repository
+      uses: github/codeql-action/upload-sarif@v2
+      with: # Path to SARIF file relative to the root of the repository
+            sarif_file: veracode-results.sarif
