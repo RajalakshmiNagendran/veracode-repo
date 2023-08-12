@@ -43,8 +43,8 @@ jobs:
     - run: java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_KEY_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY_SECRET}}" --fail_on_severity="Very High, High" --file veracode-scan-target.zip
       continue-on-error: true
     - name: Convert pipeline scan output to SARIF format
-      id: convert
       uses: veracode/veracode-pipeline-scan-results-to-sarif@v1.0
       with:
         pipeline-results-json: results.json
+        output-results-sarif: veracode-results.sarif
         finding-rule-level: 4:3:0
