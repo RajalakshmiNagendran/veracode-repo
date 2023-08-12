@@ -47,3 +47,4 @@ jobs:
       uses: veracode/veracode-pipeline-scan-results-to-sarif@v1.0.5
       with:
         pipeline-results-json: results.json
+        finding-rule-level: 4:3:0
