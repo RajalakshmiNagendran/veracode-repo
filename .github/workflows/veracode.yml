@@ -11,7 +11,7 @@ jobs:
           pwd  # Print the current working directory
           ls
       - name: build
-        run: mvn clean verify
+        run: mvn -f app/ clean verify
   pipeline-scan:
     runs-on: ubuntu-latest
     steps:
