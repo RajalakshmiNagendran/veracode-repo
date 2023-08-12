@@ -8,11 +8,10 @@ jobs:
     steps:
       - name: Print Current Directory
         run: |
-          pwd  # Print the current working directory
-          #cd /home/runner/work/veracode-repo/app
-          ls
+          cd $GITHUB_WORKSPACE
+          pwd
       - name: build
-        run: mvn clean verify -f ${current.project.path}
+        run: mvn clean verify
   pipeline-scan:
     runs-on: ubuntu-latest
     steps:
