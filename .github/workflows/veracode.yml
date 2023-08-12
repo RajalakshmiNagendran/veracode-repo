@@ -9,9 +9,11 @@ jobs:
       - name: Print Current Directory
         run: |
           pwd  # Print the current working directory
+          cd /home/runner/work/veracode-repo/app
+          pwd
           ls
       - name: build
-        run: mvn -f home/runner/work/veracode-repo/app/ clean verify
+        run: mvn clean verify
   pipeline-scan:
     runs-on: ubuntu-latest
     steps:
