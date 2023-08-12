@@ -44,7 +44,7 @@ jobs:
       continue-on-error: true
       
     - name: Convert pipeline scan output to SARIF format
-      uses: Lerer/veracode-pipeline-scan-results-to-sarif@v1
+      uses: Lerer/veracode-pipeline-scan-results-to-sarif@v1.0
       with:
           pipeline-results-json: results.json
           output-results-sarif: veracode-results.sarif
